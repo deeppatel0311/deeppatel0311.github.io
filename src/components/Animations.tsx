@@ -14,7 +14,7 @@ export const FadeInUp = ({ children, delay = 0, className = '' }: AnimatedSectio
     initial={{ opacity: 0, y: 60 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: '-100px' }}
-    transition={{ duration: 0.6, delay, ease: 'easeOut' }}
+    transition={{ duration: 0.6, delay, ease: 'easeOut' as const }}
     className={className}
   >
     {children}
@@ -26,7 +26,7 @@ export const FadeInLeft = ({ children, delay = 0, className = '' }: AnimatedSect
     initial={{ opacity: 0, x: -60 }}
     whileInView={{ opacity: 1, x: 0 }}
     viewport={{ once: true, margin: '-100px' }}
-    transition={{ duration: 0.6, delay, ease: 'easeOut' }}
+    transition={{ duration: 0.6, delay, ease: 'easeOut' as const }}
     className={className}
   >
     {children}
@@ -38,7 +38,7 @@ export const FadeInRight = ({ children, delay = 0, className = '' }: AnimatedSec
     initial={{ opacity: 0, x: 60 }}
     whileInView={{ opacity: 1, x: 0 }}
     viewport={{ once: true, margin: '-100px' }}
-    transition={{ duration: 0.6, delay, ease: 'easeOut' }}
+    transition={{ duration: 0.6, delay, ease: 'easeOut' as const }}
     className={className}
   >
     {children}
@@ -50,7 +50,7 @@ export const ScaleIn = ({ children, delay = 0, className = '' }: AnimatedSection
     initial={{ opacity: 0, scale: 0.8 }}
     whileInView={{ opacity: 1, scale: 1 }}
     viewport={{ once: true, margin: '-100px' }}
-    transition={{ duration: 0.6, delay, ease: 'easeOut' }}
+    transition={{ duration: 0.6, delay, ease: 'easeOut' as const }}
     className={className}
   >
     {children}
@@ -80,7 +80,7 @@ export const StaggerItem = ({ children, className = '' }: { children: ReactNode,
   <motion.div
     variants={{
       hidden: { opacity: 0, y: 30 },
-      visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
+      visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } }
     }}
     className={className}
   >

@@ -59,7 +59,7 @@ export const TypewriterText = ({ text, delay = 0 }: { text: string, delay?: numb
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 200
       }
@@ -68,7 +68,7 @@ export const TypewriterText = ({ text, delay = 0 }: { text: string, delay?: numb
       opacity: 0,
       y: 20,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 200
       }
@@ -109,7 +109,7 @@ export const GlowingOrb = ({ size = 200, color = "cyan" }: { size?: number, colo
     transition={{
       duration: 4,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const
     }}
   />
 )

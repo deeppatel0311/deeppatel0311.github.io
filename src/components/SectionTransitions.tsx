@@ -10,7 +10,7 @@ export const SectionTransition = ({ variant = 'wave' }: { variant?: 'wave' | 'di
           className="absolute inset-0"
           initial={{ pathLength: 0 }}
           whileInView={{ pathLength: 1 }}
-          transition={{ duration: 2, ease: "easeInOut" }}
+          transition={{ duration: 2, ease: "easeInOut" as const }}
           viewport={{ once: true }}
         >
           <svg
@@ -23,7 +23,7 @@ export const SectionTransition = ({ variant = 'wave' }: { variant?: 'wave' | 'di
               fill="url(#gradient1)"
               initial={{ pathLength: 0, opacity: 0 }}
               whileInView={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 2, ease: "easeInOut" }}
+              transition={{ duration: 2, ease: "easeInOut" as const }}
               viewport={{ once: true }}
             />
             <defs>
@@ -47,7 +47,7 @@ export const SectionTransition = ({ variant = 'wave' }: { variant?: 'wave' | 'di
           style={{ clipPath: 'polygon(0 0, 100% 100%, 100% 100%, 0 100%)' }}
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
+          transition={{ duration: 1.5, ease: "easeOut" as const }}
           viewport={{ once: true }}
         />
       </div>
@@ -74,7 +74,7 @@ export const SectionTransition = ({ variant = 'wave' }: { variant?: 'wave' | 'di
               duration: 3,
               repeat: Infinity,
               delay: i * 0.2,
-              ease: "easeInOut"
+              ease: "easeInOut" as const
             }}
           />
         ))}
@@ -88,7 +88,7 @@ export const SectionTransition = ({ variant = 'wave' }: { variant?: 'wave' | 'di
         className="absolute inset-0"
         initial={{ scaleY: 0 }}
         whileInView={{ scaleY: 1 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        transition={{ duration: 1, ease: "easeOut" as const }}
         viewport={{ once: true }}
       >
         <svg
@@ -129,7 +129,7 @@ export const ParallaxBackground = ({ children }: { children: React.ReactNode }) 
       duration: 20,
       repeat: Infinity,
       repeatType: 'reverse',
-      ease: 'linear',
+      ease: 'linear' as const,
     }}
   >
     {children}
@@ -153,10 +153,10 @@ export const MagneticButton = ({ children, className = '' }: { children: React.R
         boxShadow: {
           duration: 2,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: 'easeInOut' as const,
         },
         scale: {
-          type: 'spring',
+          type: 'spring' as const,
           stiffness: 400,
           damping: 10,
         },

@@ -129,7 +129,7 @@ export const FloatingElement = ({ children, className = '' }: { children: ReactN
     transition={{
       duration: 3,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const
     }}
     className={className}
   >
@@ -149,7 +149,7 @@ export const PulseGlow = ({ children, className = '' }: { children: ReactNode, c
     transition={{
       duration: 2,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const
     }}
     className={className}
   >
