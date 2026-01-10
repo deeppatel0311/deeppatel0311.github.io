@@ -1,37 +1,51 @@
-import Link from 'next/link'
-import { Calendar, ArrowRight, Clock, BookOpen, TrendingUp } from 'lucide-react'
-import { FadeInUp, StaggerContainer, StaggerItem } from '@/components/Animations'
+import Link from "next/link";
+import {
+  Calendar,
+  ArrowRight,
+  Clock,
+  BookOpen,
+  TrendingUp,
+} from "lucide-react";
+import {
+  FadeInUp,
+  StaggerContainer,
+  StaggerItem,
+} from "@/components/Animations";
 
 export default function BlogPreview() {
   const posts = [
     {
-      title: 'Building Scalable React Applications',
-      excerpt: 'Learn the best practices for structuring and scaling React applications for production environments.',
-      date: '2024-01-15',
-      slug: 'building-scalable-react-applications',
-      readTime: '5 min read',
-      category: 'React',
+      title:
+        "Serverless File Processing: Resize Images Automatically Using Lambda + S3",
+      excerpt:
+        "Learn how to automatically resize images using AWS Lambda and S3, creating a fully serverless file processing workflow.",
+      date: "2025-12-18",
+      slug: "serverless-file-processing-resize-images-lambda-s3",
+      readTime: "8 min read",
+      category: "AWS",
       trending: true,
     },
     {
-      title: 'Modern CSS Techniques with Tailwind',
-      excerpt: 'Explore advanced CSS techniques and how Tailwind CSS can streamline your development workflow.',
-      date: '2024-01-10',
-      slug: 'modern-css-techniques-tailwind',
-      readTime: '7 min read',
-      category: 'CSS',
+      title: "AWS Lambda Layers Explained Simply (With One Example)",
+      excerpt:
+        "Learn what AWS Lambda Layers are, why they are useful, and see a simple example using Lodash to make your functions smaller and reusable.",
+      date: "2025-11-03",
+      slug: "aws-lambda-layers-explained",
+      readTime: "7 min read",
+      category: "AWS",
+      trending: true,
+    },
+    {
+      title: "Amazon Q for Developers: Is This the Future of Coding?",
+      excerpt:
+        "Explore Amazon Q, the AI-powered coding assistant by AWS, and its potential impact on developers and the future of programming.",
+      date: "2025-10-05",
+      slug: "amazon-q-for-developers-future-of-coding",
+      readTime: "6 min read",
+      category: "AWS",
       trending: false,
     },
-    {
-      title: 'Next.js 14: What\'s New and Exciting',
-      excerpt: 'A comprehensive overview of the latest features and improvements in Next.js 14.',
-      date: '2024-01-05',
-      slug: 'nextjs-14-whats-new',
-      readTime: '6 min read',
-      category: 'Next.js',
-      trending: true,
-    },
-  ]
+  ];
 
   return (
     <section className="section-padding bg-gray-900 relative overflow-hidden">
@@ -39,7 +53,7 @@ export default function BlogPreview() {
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(16,185,129,0.08),transparent_50%)]"></div>
       </div>
-      
+
       <div className="container-max relative z-10">
         <FadeInUp className="text-center mb-20">
           <div className="flex justify-center mb-6">
@@ -51,8 +65,8 @@ export default function BlogPreview() {
             Latest <span className="gradient-text">Blog Posts</span>
           </h2>
           <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-            I share my thoughts on cloud development, serverless architecture, and the latest
-            technologies in backend development.
+            I share my thoughts on cloud development, serverless architecture,
+            and the latest technologies in backend development.
           </p>
         </FadeInUp>
 
@@ -69,44 +83,44 @@ export default function BlogPreview() {
                   <span>Trending</span>
                 </div>
               )}
-              
+
               {/* Category badge */}
               <div className="inline-block bg-blue-500/10 text-blue-300 text-xs px-3 py-1 rounded-full mb-4 border border-blue-500/20">
                 {post.category}
               </div>
-              
+
               <div className="flex items-center text-sm text-white/60 mb-4 space-x-4">
                 <div className="flex items-center">
                   <Calendar size={14} className="mr-2" />
-                  <span>{new Date(post.date).toLocaleDateString()}</span>
+                  <span>{new Date(post.date).toLocaleDateString("en-GB")}</span>
                 </div>
                 <div className="flex items-center">
                   <Clock size={14} className="mr-2" />
                   <span>{post.readTime}</span>
                 </div>
               </div>
-              
+
               <h3 className="text-xl font-bold text-white mb-4 group-hover:text-blue-300 transition-colors duration-300">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="hover:underline"
-                >
+                <Link href={`/blog/${post.slug}`} className="hover:underline">
                   {post.title}
                 </Link>
               </h3>
-              
+
               <p className="text-white/70 mb-6 text-sm leading-relaxed group-hover:text-white/90 transition-colors duration-300">
                 {post.excerpt}
               </p>
-              
+
               <Link
                 href={`/blog/${post.slug}`}
                 className="inline-flex items-center text-blue-400 hover:text-blue-300 font-semibold text-sm group-hover:translate-x-2 transition-all duration-300"
               >
                 Read More
-                <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight
+                  size={16}
+                  className="ml-2 group-hover:translate-x-1 transition-transform duration-300"
+                />
               </Link>
-              
+
               {/* Hover gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
             </StaggerItem>
@@ -123,5 +137,5 @@ export default function BlogPreview() {
         </div>
       </div>
     </section>
-  )
+  );
 }

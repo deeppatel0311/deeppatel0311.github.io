@@ -1,34 +1,60 @@
-import { ExternalLink, Github } from 'lucide-react'
-import { FadeInUp, StaggerContainer, StaggerItem } from '@/components/Animations'
-import { EnhancedSection, GlassCard, AnimatedText, StaggerGrid, GridItem, GradientBorder } from '@/components/EnhancedUI'
+import { ExternalLink, Github } from "lucide-react";
+import {
+  FadeInUp,
+  StaggerContainer,
+  StaggerItem,
+} from "@/components/Animations";
+import {
+  EnhancedSection,
+  GlassCard,
+  AnimatedText,
+  StaggerGrid,
+  GridItem,
+  GradientBorder,
+} from "@/components/EnhancedUI";
 
 export default function Projects() {
   const projects = [
     {
-      title: 'AWS Podcast Platform',
-      description: 'Serverless podcast platform built with AWS services including Lambda, DynamoDB, and S3. Features audio streaming, user management, and real-time analytics with scalable cloud architecture.',
-      technologies: ['AWS Lambda', 'DynamoDB', 'S3', 'CloudFront', 'API Gateway'],
-      github: 'https://github.com/deeppatel0311/aws-podcast',
-      live: '#',
-      gradient: 'from-orange-500 to-red-500',
+      title: "AWS Podcast Platform",
+      description:
+        "A proprietary React application for delivering AWS news and updates in podcast format. This platform automatically converts AWS RSS feeds into professional audio content using AI-powered script generation and text-to-speech technology.",
+      technologies: [
+        "Amazon Bedrock",
+        "Amazon Polly",
+        "AWS Lambda",
+        "DynamoDB",
+        "S3",
+      ],
+      github: "https://github.com/deeppatel0311/aws-podcast",
+      live: "https://deeppatel0311.github.io/aws-podcast/",
+      gradient: "from-orange-500 to-red-500",
     },
     {
-      title: 'Word Wizard Game',
-      description: 'Interactive word puzzle game with engaging gameplay mechanics, score tracking, and progressive difficulty levels. Built with modern web technologies for optimal user experience.',
-      technologies: ['JavaScript', 'HTML5', 'CSS3', 'Local Storage', 'Game Logic'],
-      github: 'https://github.com/deeppatel0311/word-wizard',
-      live: '#',
-      gradient: 'from-purple-500 to-pink-500',
+      title: "Word Wizard Game",
+      description:
+        "A simple and powerful text processing tool built with React. Transform your text with essential formatting options including case conversion, text manipulation, and encoding tools.",
+      technologies: ["React", "Java Script", "Tailwind css", "Local Storage"],
+      github: "https://github.com/deeppatel0311/word-wizard",
+      live: "https://deeppatel0311.github.io/word-wizard",
+      gradient: "from-purple-500 to-pink-500",
     },
     {
-      title: 'Android User Authentication',
-      description: 'Secure Android authentication system with biometric login, JWT token management, and encrypted local storage. Implements modern security practices for mobile applications.',
-      technologies: ['Android Native', 'Java', 'Biometric API', 'JWT', 'SQLite'],
-      github: 'https://github.com/deeppatel0311/android-authenticate-user',
-      live: '#',
-      gradient: 'from-green-500 to-teal-500',
+      title: "Android User Authentication",
+      description:
+        "Secure Android authentication system with biometric login, JWT token management, and encrypted local storage. Implements modern security practices for mobile applications.",
+      technologies: [
+        "Android Native",
+        "Java",
+        "Biometric API",
+        "JWT",
+        "SQLite",
+      ],
+      github: "https://github.com/deeppatel0311/android-authenticate-user",
+      live: "#",
+      gradient: "from-green-500 to-teal-500",
     },
-  ]
+  ];
 
   return (
     <section id="projects" className="section-padding bg-gray-950 relative">
@@ -42,8 +68,8 @@ export default function Projects() {
             Featured <span className="gradient-text">Projects</span>
           </h2>
           <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-            Here are some of my recent projects showcasing cloud backend development,
-            cross-platform mobile apps, and full-stack solutions.
+            Here are some of my recent projects showcasing cloud backend
+            development, cross-platform mobile apps, and full-stack solutions.
           </p>
         </AnimatedText>
 
@@ -51,13 +77,15 @@ export default function Projects() {
           {projects.map((project, index) => (
             <GridItem key={index}>
               <GradientBorder className="overflow-hidden h-full">
-                <div className={`relative h-56 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
+                <div
+                  className={`relative h-56 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}
+                >
                   <div className="text-white text-2xl font-bold opacity-80">
                     {project.title}
                   </div>
                   <div className="absolute inset-0 bg-black/20"></div>
                 </div>
-                
+
                 <div className="p-8">
                   <h3 className="text-2xl font-bold text-white mb-4">
                     {project.title}
@@ -65,7 +93,7 @@ export default function Projects() {
                   <p className="text-white/70 mb-6 leading-relaxed">
                     {project.description}
                   </p>
-                  
+
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.technologies.map((tech, techIndex) => (
                       <span
@@ -76,7 +104,7 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
-                  
+
                   <div className="flex space-x-4">
                     <a
                       href={project.github}
@@ -104,5 +132,5 @@ export default function Projects() {
         </StaggerGrid>
       </div>
     </section>
-  )
+  );
 }

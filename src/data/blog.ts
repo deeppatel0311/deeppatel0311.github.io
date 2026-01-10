@@ -1,22 +1,23 @@
 export interface BlogPost {
-  slug: string
-  title: string
-  excerpt: string
-  content: string
-  date: string
-  readTime: string
-  tags: string[]
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  date: string;
+  readTime: string;
+  tags: string[];
   author: {
-    name: string
-    avatar: string
-  }
+    name: string;
+    avatar: string;
+  };
 }
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'building-scalable-react-applications',
-    title: 'Building Scalable React Applications',
-    excerpt: 'Learn the best practices for structuring and scaling React applications for production environments.',
+    slug: "building-scalable-react-applications",
+    title: "Building Scalable React Applications",
+    excerpt:
+      "Learn the best practices for structuring and scaling React applications for production environments.",
     content: `
 # Building Scalable React Applications
 
@@ -73,294 +74,421 @@ Test complete user workflows to ensure everything works as expected.
 
 Building scalable React applications requires careful planning and adherence to best practices. By following these principles, you can create applications that are maintainable, performant, and ready to grow with your needs.
     `,
-    date: '2024-01-15',
-    readTime: '5 min read',
-    tags: ['React', 'JavaScript', 'Architecture', 'Best Practices'],
+    date: "2025-03-15",
+    readTime: "5 min read",
+    tags: ["React", "JavaScript", "Architecture", "Best Practices"],
     author: {
-      name: 'Deep Patel',
-      avatar: '/api/placeholder/40/40',
+      name: "Deep Patel",
+      avatar: "/api/placeholder/40/40",
     },
   },
   {
-    slug: 'modern-css-techniques-tailwind',
-    title: 'Modern CSS Techniques with Tailwind',
-    excerpt: 'Explore advanced CSS techniques and how Tailwind CSS can streamline your development workflow.',
-    content: `
-# Modern CSS Techniques with Tailwind
+    slug: "understanding-api-gateway-rest-http-websocket",
+    title: "Understanding API Gateway: REST API vs HTTP API vs WebSocket",
+    excerpt:
+      "A simple and beginner-friendly guide to choosing between REST API, HTTP API, and WebSocket API in Amazon API Gateway.",
+    content: `# Understanding API Gateway: REST API vs HTTP API vs WebSocket
 
-Tailwind CSS has revolutionized how we approach styling in modern web development. Let's explore some advanced techniques and best practices.
+Amazon API Gateway is a popular AWS service that helps you create and manage APIs for web, mobile, and serverless applications.
 
-## Utility-First Approach
+But choosing between **REST API**, **HTTP API**, and **WebSocket API** can be confusing.
 
-Tailwind's utility-first approach offers several advantages:
+Let’s break it down 👇
 
-### Rapid Development
-Build interfaces quickly by composing utilities directly in your markup.
+## What is Amazon API Gateway?
 
-### Consistent Design System
-Tailwind provides a consistent set of design tokens out of the box.
+Amazon API Gateway acts as a **front door** for your backend services such as:
 
-### Responsive Design
-Built-in responsive utilities make it easy to create adaptive layouts.
+- AWS Lambda
+- EC2
+- ECS
+- Any HTTP endpoint
 
-## Advanced Techniques
+It handles routing, security, scaling, and monitoring so you can focus on building features.
 
-### Custom Properties with Tailwind
-Combine CSS custom properties with Tailwind for dynamic theming.
+## REST API
 
-### Component Extraction
-When you find yourself repeating utility combinations, extract them into components.
+### Best for: Complex & enterprise-grade APIs
 
-### Animation and Transitions
-Create smooth animations with Tailwind's transition utilities.
+**REST API** is the most feature-rich option in API Gateway.
 
-## Performance Considerations
+### Key points
 
-### Purging Unused CSS
-Tailwind automatically removes unused styles in production, keeping your CSS bundle small.
+- Full REST support (resources & methods)
+- API keys and usage plans
+- Request/response transformation
+- Advanced authorization (IAM, Cognito, Lambda Authorizer)
+- Caching support
 
-### JIT Mode
-Just-In-Time mode generates styles on-demand, providing better performance and unlimited customization.
+### When to use
 
-## Conclusion
+- You need advanced API management features
+- You want fine-grained control over requests and responses
+- You’re building large or legacy REST APIs
 
-Tailwind CSS provides a powerful foundation for modern web styling. By mastering these techniques, you can build beautiful, maintainable interfaces efficiently.
-    `,
-    date: '2024-01-10',
-    readTime: '7 min read',
-    tags: ['CSS', 'Tailwind', 'Design', 'Frontend'],
+⚠️ Slightly higher cost and latency compared to HTTP API
+
+## HTTP API
+
+### Best for: Modern serverless APIs
+
+**HTTP API** is a lightweight, faster, and cheaper alternative to REST API.
+
+### Key points
+
+- Lower latency and cost
+- Simple routing
+- Native Lambda integration
+- JWT authentication (Cognito / OAuth 2.0)
+- Built-in CORS support
+
+### When to use
+
+- You’re building serverless or microservices-based APIs
+- You don’t need advanced REST features
+- Cost and performance matter
+
+🚀 Recommended choice for most modern applications.
+
+## WebSocket API
+
+### Best for: Real-time communication
+
+**WebSocket API** enables persistent, bidirectional communication between clients and servers.
+
+### Key points
+
+- Real-time data exchange
+- Persistent connections
+- Event-based routes: '$connect', '$disconnect', '$default'
+- Works well with Lambda and DynamoDB
+
+### When to use
+
+- Chat applications
+- Live notifications
+- Online games
+- Real-time dashboards
+
+## Quick Comparison
+
+| Feature | REST API | HTTP API | WebSocket API |
+| Protocol | HTTP | HTTP | WebSocket |
+| Cost | 💰 High | 💵 Low | 💰 Medium |
+| Latency | ⚡ Medium | ⚡ Low | ⚡ Very Low |
+| Real-time support | ❌ No | ❌ No | ✅ Yes |
+| API Keys & Usage Plans | ✅ Yes | ❌ No | ❌ No |
+| Request/Response Transformation | ✅ Yes | ⚠️ Limited | ⚠️ Limited |
+| Best Use Case | Complex enterprise APIs | Serverless & microservices | Live apps, chat, real-time dashboards |
+
+## Which One Should You Choose?
+
+- Choose **REST API** for advanced control and enterprise needs  
+- Choose **HTTP API** for fast, low-cost serverless APIs  
+- Choose **WebSocket API** for real-time applications  
+
+Many production systems use **a mix of these**, depending on the use case.
+
+## Final Thoughts
+
+Choosing the right API Gateway type impacts **cost, performance, and scalability**.
+
+For most modern AWS projects, **HTTP API** is the best starting point, while **WebSocket API** is ideal for real-time use cases.
+
+Happy building 🚀`,
+    date: "2025-08-10",
+    readTime: "7 min read",
+    tags: ["aws", "serverless", "apigateway", "cloud", "beginners"],
     author: {
-      name: 'Deep Patel',
-      avatar: '/api/placeholder/40/40',
+      name: "Deep Patel",
+      avatar: "/api/placeholder/40/40",
     },
   },
   {
-    slug: 'nextjs-14-whats-new',
-    title: 'Next.js 14: What\'s New and Exciting',
-    excerpt: 'A comprehensive overview of the latest features and improvements in Next.js 14.',
-    content: `
-# Next.js 14: What's New and Exciting
+    slug: "amazon-q-for-developers-future-of-coding",
+    title: "Amazon Q for Developers: Is This the Future of Coding?",
+    excerpt:
+      "Explore Amazon Q, the AI-powered coding assistant by AWS, and its potential impact on developers and the future of programming.",
+    content: `# Amazon Q for Developers: Is This the Future of Coding?
 
-Next.js 14 brings significant improvements to performance, developer experience, and new features that make building React applications even better.
+Amazon recently introduced **Amazon Q**, an AI-powered coding assistant that promises to redefine the way developers write and understand code. But what is it, and how could it shape the future of programming?
 
-## Key Features
+## What is Amazon Q?
 
-### Turbopack (Beta)
-Next.js 14 includes Turbopack in beta, offering:
-- 53% faster local server startup
-- 94% faster code updates with Fast Refresh
+Amazon Q is designed to help developers **write, debug, and optimize code** using AI. It leverages large language models to:
 
-### Server Actions (Stable)
-Server Actions are now stable, providing a seamless way to handle server-side logic.
+- Suggest code snippets
+- Automate repetitive tasks
+- Provide real-time explanations for code
+- Integrate with AWS services seamlessly
 
-### Partial Prerendering (Preview)
-A new rendering model that combines static and dynamic rendering.
+Think of it as **a smart coding companion** that sits alongside your IDE.
 
-## Performance Improvements
+## Key Features for Developers
 
-### Metadata API Enhancements
-Improved metadata handling for better SEO.
+- **AI-powered code suggestions** – Q can autocomplete entire functions or provide context-aware code snippets.
+- **Debugging assistance** – Identify errors, suggest fixes, and explain why a piece of code might fail.
+- **Documentation generation** – Automatically generate inline documentation or API references.
+- **Cloud integration** – Directly works with AWS services like Lambda, DynamoDB, and S3, making cloud-native development faster.
 
-### Image Optimization
-Enhanced image optimization with better performance and smaller bundle sizes.
+## How Amazon Q Could Change Coding
 
-## Developer Experience
+1. **Faster Development** – By suggesting code and reducing boilerplate, developers can focus on logic and architecture.  
+2. **Lower Barrier to Entry** – Beginners can write more complex programs with guidance from AI.  
+3. **Enhanced Collaboration** – Q can provide explanations for code, helping teams onboard faster.  
+4. **Shift in Skills** – The focus may move from memorizing syntax to designing systems and problem-solving.
 
-### Improved Error Messages
-More helpful error messages and better debugging experience.
+## Limitations to Keep in Mind
 
-### Enhanced TypeScript Support
-Better type inference and improved IntelliSense support.
+- **Context Awareness** – While Q is smart, it may not fully understand the unique architecture of your project.  
+- **Over-reliance on AI** – Developers still need critical thinking to verify AI suggestions.  
+- **Cost & Access** – Initially, this may be limited to certain AWS users or paid tiers.
 
-## Migration Guide
+## The Future Outlook
 
-Upgrading to Next.js 14 is straightforward:
+Amazon Q is part of a broader trend where **AI is becoming a co-pilot for developers**. We’re moving towards a future where:
 
-1. Update your dependencies
-2. Update your configuration if needed
-3. Test your application thoroughly
+- Writing standard code may become mostly assisted by AI  
+- Human developers focus more on **architecture, design, and problem-solving**  
+- Learning to effectively collaborate with AI becomes a key skill
 
-## Conclusion
+## Final Thoughts
 
-Next.js 14 represents a significant step forward in React framework development. The combination of performance improvements, new features, and enhanced developer experience makes it an excellent choice for modern web applications.
-    `,
-    date: '2024-01-05',
-    readTime: '6 min read',
-    tags: ['Next.js', 'React', 'Web Development', 'Performance'],
+Amazon Q is not just another IDE plugin — it could redefine **how coding is done in the cloud era**. While it won’t replace developers, it promises to **accelerate workflows, reduce friction, and make coding more accessible**.  
+
+The question isn’t whether developers will use AI — it’s **how effectively we integrate AI into our workflow**.`,
+    date: "2025-10-05",
+    readTime: "6 min read",
+    tags: ["aws", "amazon", "ai", "developers", "future", "programming"],
     author: {
-      name: 'Deep Patel',
-      avatar: '/api/placeholder/40/40',
+      name: "Deep Patel",
+      avatar: "/api/placeholder/40/40",
     },
   },
   {
-    slug: 'typescript-advanced-patterns',
-    title: 'Advanced TypeScript Patterns for Better Code',
-    excerpt: 'Discover advanced TypeScript patterns and techniques that will make your code more robust and maintainable.',
+    slug: "serverless-file-processing-resize-images-lambda-s3",
+    title:
+      "Serverless File Processing: Resize Images Automatically Using Lambda + S3",
+    excerpt:
+      "Learn how to automatically resize images using AWS Lambda and S3, creating a fully serverless file processing workflow.",
+    content: `# Serverless File Processing: Resize Images Automatically Using Lambda + S3
+
+Handling images at scale can be challenging. Whether it's for a website, app, or storage optimization, **resizing images automatically** saves time and reduces storage costs.
+
+With **AWS Lambda and S3**, you can build a fully serverless workflow that **resizes images automatically** whenever a new file is uploaded.
+
+## How It Works
+
+The workflow is simple:
+
+- A user uploads an image to an S3 bucket ('uploads/' folder).
+- An S3 event triggers a Lambda function.
+- The Lambda function resizes the image to desired dimensions.
+- The resized image is saved to another S3 folder ('resized/').
+
+This approach **requires no servers**, scales automatically, and integrates seamlessly with your AWS environment.
+
+## AWS Services Used
+
+- **Amazon S3** – Stores original and resized images.
+- **AWS Lambda** – Processes images on upload.
+- **Node.js + Sharp** – Resizes images efficiently in Lambda.
+- **S3 Event Notifications** – Trigger Lambda on new uploads.
+
+## Lambda Function Code (Node.js)
+
+\`\`\`javascript
+import { S3Client, GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3"
+import sharp from "sharp"
+
+const s3 = new S3Client({ region: "us-east-1" })
+
+export const handler = async (event) => {
+  for (const record of event.Records) {
+    const bucket = record.s3.bucket.name
+    const key = record.s3.object.key
+
+    // Get the original image
+    const original = await s3.send(
+      new GetObjectCommand({ Bucket: bucket, Key: key })
+    )
+
+    const buffer = await streamToBuffer(original.Body)
+
+    // Resize the image
+    const resized = await sharp(buffer)
+      .resize({ width: 300 }) // Resize width to 300px
+      .toBuffer()
+
+    // Save resized image to another folder
+    await s3.send(
+      new PutObjectCommand({
+        Bucket: bucket,
+        Key: 'resized/\${key}',
+        Body: resized,
+        ContentType: "image/jpeg"
+      })
+    )
+
+    console.log('Resized image saved: resized/\${key}')
+  }
+}
+
+// Helper function to convert stream to buffer
+const streamToBuffer = async (stream) => {
+  const chunks = []
+  for await (const chunk of stream) {
+    chunks.push(chunk)
+  }
+  return Buffer.concat(chunks)
+}
+\`\`\`
+
+## Setting Up S3 Event Trigger
+
+- Go to your S3 bucket → **Properties → Event notifications**
+- Add a new event:
+  - Event type: 'PUT' (for new uploads)
+  - Prefix: uploads/' (optional)
+  - Lambda function: select the function created above
+
+Now, whenever you upload an image to 'uploads/', Lambda will automatically resize it and save it in 'resized/'.
+
+## Benefits of This Serverless Approach
+
+- **No servers to manage** – fully managed by AWS
+- **Automatic scaling** – handles thousands of images at once
+- **Cost-efficient** – pay only for Lambda invocations
+- **Flexible resizing** – easily add multiple sizes (thumbnails, web, etc.)
+
+## Extending This Workflow
+
+- **Generate multiple sizes**: small, medium, large for responsive design.
+- **Optimize images**: use 'sharp' to compress images for web.
+- **Send notifications**: trigger SNS or email after processing.
+- **Integrate with APIs**: make resized images accessible via CloudFront.
+
+## Final Thoughts
+
+Serverless file processing with **Lambda + S3** is a **powerful pattern** for modern applications. It reduces operational overhead, is cost-efficient, and can be extended to handle **videos, PDFs, or any other files**.
+
+Start small with image resizing and expand your serverless workflows as your application grows. 🚀
+`,
+    date: "2025-12-18",
+    readTime: "8 min read",
+    tags: ["TypeScript", "JavaScript", "Programming", "Best Practices"],
+    author: {
+      name: "Deep Patel",
+      avatar: "/api/placeholder/40/40",
+    },
+  },
+  {
+    slug: "aws-lambda-layers-explained",
+    title: "AWS Lambda Layers Explained Simply (With One Example)",
+    excerpt:
+      "Learn what AWS Lambda Layers are, why they are useful, and see a simple example using Lodash to make your functions smaller and reusable.",
     content: `
-# Advanced TypeScript Patterns for Better Code
+# AWS Lambda Layers Explained Simply (With One Example)
 
-TypeScript offers powerful features that go beyond basic type annotations. Let's explore advanced patterns that can significantly improve your code quality.
+AWS Lambda Layers are a powerful feature that lets you **share code, libraries, and dependencies** across multiple Lambda functions. Layers help you **reduce duplication**, manage updates more efficiently, and keep your functions smaller.
 
-## Generic Constraints
+## Why Use Lambda Layers?
 
-Generic constraints allow you to limit the types that can be used with generics, providing better type safety and IntelliSense.
+- **Code Reusability**: Share common libraries or helper functions across multiple Lambdas.
+- **Smaller Function Packages**: Keep your deployment package lean by moving large dependencies to a layer.
+- **Easier Updates**: Update the layer once, and all functions using it get the update automatically.
+- **Organized Structure**: Separate application logic from external dependencies.
 
-### Keyof Constraints
-Use keyof to constrain generics to object keys.
+## How Lambda Layers Work
 
-### Conditional Types
-Create types that change based on conditions.
+- A Lambda Layer is basically a **.zip archive** containing code, libraries, or custom runtimes.
+- You can attach **up to 5 layers** to a Lambda function.
+- Each layer can contain **libraries, custom runtimes, or even shared configuration files**.
+- Lambda functions can access the layer content at **/opt** during execution.
 
-## Utility Types
+## Example: Using a Layer to Include Lodash
 
-TypeScript provides built-in utility types that can transform existing types:
+Let's say you want to use the popular **Lodash** library across multiple Lambda functions.
 
-### Partial and Required
-Make all properties optional or required.
+### Step 1: Create a Layer
 
-### Pick and Omit
-Select or exclude specific properties from types.
+\`\`\`bash
+mkdir my-layer
+cd my-layer
+mkdir nodejs
+cd nodejs
+npm init -y
+npm install lodash
+zip -r ../my-layer.zip .
+\`\`\`
 
-### Record and Mapped Types
-Create new types by mapping over existing ones.
+### Step 2: Upload Layer to Lambda
 
-## Advanced Function Types
+- Go to AWS Lambda → **Layers → Create Layer**
+- Name your layer **lodash-layer**
+- Upload **my-layer.zip**
+- Choose runtime (e.g., Node.js 20)
 
-### Function Overloads
-Define multiple function signatures for different use cases.
+### Step 3: Use Layer in a Lambda Function
 
-### Higher-Order Function Types
-Type functions that accept or return other functions.
+\`\`\`javascript
+import _ from 'lodash'
 
-## Template Literal Types
+export const handler = async (event) => {
+  const numbers = [1, 2, 3, 4, 5]
+  const reversed = _.reverse([...numbers])
+  console.log('Reversed Array:', reversed)
+  return reversed
+}
+\`\`\`
 
-Create types from string templates for better string manipulation.
-
-## Discriminated Unions
-
-Use discriminated unions for type-safe state management and API responses.
+- Attach the **lodash-layer** to your Lambda function.
+- Now '_' (Lodash) is available inside your function **without including it in the deployment package**.
 
 ## Best Practices
 
-### Type Guards
-Implement custom type guards for runtime type checking.
+- Keep **layers small**: Only include necessary files.
+- Use **versioning**: Every time you update a layer, publish a new version.
+- **Share layers across accounts** if needed, but manage permissions carefully.
+- **Combine layers wisely**: Avoid too many layers; they can increase cold start times.
 
-### Assertion Functions
-Create functions that assert types and narrow them.
+## Key Benefits
 
-### Module Augmentation
-Extend existing types from third-party libraries.
-
-## Conclusion
-
-Mastering these advanced TypeScript patterns will help you write more robust, maintainable, and type-safe code. Start incorporating these techniques into your projects today.
-    `,
-    date: '2023-12-28',
-    readTime: '8 min read',
-    tags: ['TypeScript', 'JavaScript', 'Programming', 'Best Practices'],
-    author: {
-      name: 'Deep Patel',
-      avatar: '/api/placeholder/40/40',
-    },
-  },
-  {
-    slug: 'web-performance-optimization-guide',
-    title: 'Complete Guide to Web Performance Optimization',
-    excerpt: 'Learn essential techniques to optimize your web applications for speed, user experience, and search engine rankings.',
-    content: `
-# Complete Guide to Web Performance Optimization
-
-Web performance is crucial for user experience, SEO, and business success. This comprehensive guide covers essential optimization techniques.
-
-## Core Web Vitals
-
-Google's Core Web Vitals are key metrics for measuring user experience:
-
-### Largest Contentful Paint (LCP)
-Measures loading performance. Aim for LCP to occur within 2.5 seconds.
-
-### First Input Delay (FID)
-Measures interactivity. FID should be less than 100 milliseconds.
-
-### Cumulative Layout Shift (CLS)
-Measures visual stability. Maintain a CLS score of less than 0.1.
-
-## Image Optimization
-
-### Modern Image Formats
-Use WebP, AVIF, or JPEG XL for better compression.
-
-### Responsive Images
-Implement srcset and sizes attributes for different screen sizes.
-
-### Lazy Loading
-Load images only when they're about to enter the viewport.
-
-## Code Optimization
-
-### Bundle Splitting
-Split your JavaScript bundles to reduce initial load time.
-
-### Tree Shaking
-Eliminate dead code from your bundles.
-
-### Minification and Compression
-Minify CSS, JavaScript, and HTML. Enable Gzip or Brotli compression.
-
-## Caching Strategies
-
-### Browser Caching
-Set appropriate cache headers for static assets.
-
-### Service Workers
-Implement service workers for offline functionality and caching.
-
-### CDN Usage
-Use Content Delivery Networks to serve assets from locations closer to users.
-
-## Database and API Optimization
-
-### Query Optimization
-Optimize database queries and use proper indexing.
-
-### API Response Caching
-Implement caching at the API level to reduce server load.
-
-### Pagination and Lazy Loading
-Implement pagination for large datasets.
-
-## Monitoring and Measurement
-
-### Performance Monitoring Tools
-Use tools like Lighthouse, WebPageTest, and real user monitoring.
-
-### Continuous Performance Testing
-Integrate performance testing into your CI/CD pipeline.
+- **Simplifies dependency management**
+- **Reduces Lambda deployment package size**
+- **Encourages code reuse**
+- **Makes updates easy and centralized**
 
 ## Conclusion
 
-Web performance optimization is an ongoing process. Regular monitoring, testing, and optimization ensure your applications provide the best possible user experience.
-    `,
-    date: '2023-12-20',
-    readTime: '10 min read',
-    tags: ['Performance', 'Web Development', 'Optimization', 'SEO'],
+Lambda Layers are a simple yet **powerful way to manage shared code** in AWS Lambda. By using layers, you can keep your functions clean, reduce duplication, and maintain libraries efficiently.  
+
+Start by moving common dependencies like Lodash or custom helper functions to a layer, and see how your Lambda development becomes faster and more organized.
+  `,
+    date: "2025-11-03",
+    readTime: "7 min read",
+    tags: ["AWS", "Lambda", "Serverless", "Layers", "Node.js", "Cloud"],
+
     author: {
-      name: 'Deep Patel',
-      avatar: '/api/placeholder/40/40',
+      name: "Deep Patel",
+      avatar: "/api/placeholder/40/40",
     },
   },
-]
+];
 
 export function getBlogPosts(): BlogPost[] {
-  return blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return blogPosts.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 }
 
 export function getBlogPost(slug: string): BlogPost | undefined {
-  return blogPosts.find(post => post.slug === slug)
+  return blogPosts.find((post) => post.slug === slug);
 }
 
-export function getRelatedPosts(currentSlug: string, limit: number = 3): BlogPost[] {
-  return blogPosts
-    .filter(post => post.slug !== currentSlug)
-    .slice(0, limit)
+export function getRelatedPosts(
+  currentSlug: string,
+  limit: number = 3
+): BlogPost[] {
+  return blogPosts.filter((post) => post.slug !== currentSlug).slice(0, limit);
 }

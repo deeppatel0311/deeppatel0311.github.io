@@ -1,29 +1,37 @@
-import Link from 'next/link'
-import { Calendar, ArrowRight, Tag, BookOpen, Zap, TrendingUp } from 'lucide-react'
-import { getBlogPosts } from '@/data/blog'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import PageTransition from '@/components/PageTransition'
+import Link from "next/link";
+import {
+  Calendar,
+  ArrowRight,
+  Tag,
+  BookOpen,
+  Zap,
+  TrendingUp,
+} from "lucide-react";
+import { getBlogPosts } from "@/data/blog";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 
 export const metadata = {
-  title: 'Blog - Deep Patel Portfolio',
-  description: 'Read my latest thoughts on cloud development, serverless architecture, and AWS best practices.',
-}
+  title: "Blog - Deep Patel Portfolio",
+  description:
+    "Read my latest thoughts on cloud development, serverless architecture, and AWS best practices.",
+};
 
 export default function BlogPage() {
-  const posts = getBlogPosts()
+  const posts = getBlogPosts();
 
   return (
     <PageTransition>
       <Header />
       <main className="pt-20">
-        <section className="section-padding morphing-bg relative overflow-hidden">
+        <section className="section-padding morphing-bg relative overflow-hidden py-12">
           {/* Enhanced background elements */}
           <div className="absolute inset-0">
             <div className="absolute top-20 right-20 w-64 h-64 bg-cyan-400/5 rounded-full blur-3xl"></div>
             <div className="absolute bottom-20 left-20 w-64 h-64 bg-purple-400/5 rounded-full blur-3xl"></div>
           </div>
-          
+
           <div className="container-max text-center relative z-10">
             <div className="flex justify-center mb-8">
               <div className="glass-strong p-6 rounded-full">
@@ -34,10 +42,13 @@ export default function BlogPage() {
               My <span className="gradient-text">Blog</span>
             </h1>
             <p className="text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed font-light">
-              Insights, tutorials, and thoughts on{' '}
-              <span className="text-cyan-400 font-bold">cloud development</span>,{' '}
-              <span className="text-purple-400 font-bold">serverless architecture</span>,
-              and AWS best practices.
+              Insights, tutorials, and thoughts on{" "}
+              <span className="text-cyan-400 font-bold">cloud development</span>
+              ,{" "}
+              <span className="text-purple-400 font-bold">
+                serverless architecture
+              </span>
+              , and AWS best practices.
             </p>
           </div>
         </section>
@@ -49,19 +60,23 @@ export default function BlogPage() {
                 <article
                   key={post.slug}
                   className={`${
-                    index === 0 ? 'lg:col-span-2' : ''
+                    index === 0 ? "lg:col-span-2" : ""
                   } glass-strong p-10 card-hover group relative overflow-hidden`}
                 >
                   <div className="flex items-center text-sm text-white/60 mb-6 space-x-4">
                     <Calendar size={16} className="text-cyan-400" />
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
+                    <span>
+                      {new Date(post.date).toLocaleDateString("en-GB")}
+                    </span>
                     <span>•</span>
                     <span>{post.readTime}</span>
                   </div>
 
-                  <h2 className={`font-black text-white mb-6 group-hover:text-cyan-300 transition-colors duration-500 ${
-                    index === 0 ? 'text-4xl' : 'text-3xl'
-                  }`}>
+                  <h2
+                    className={`font-black text-white mb-6 group-hover:text-cyan-300 transition-colors duration-500 ${
+                      index === 0 ? "text-4xl" : "text-3xl"
+                    }`}
+                  >
                     <Link
                       href={`/blog/${post.slug}`}
                       className="hover:underline"
@@ -70,9 +85,11 @@ export default function BlogPage() {
                     </Link>
                   </h2>
 
-                  <p className={`text-white/80 mb-8 leading-relaxed group-hover:text-white/95 transition-colors duration-500 ${
-                    index === 0 ? 'text-lg' : ''
-                  }`}>
+                  <p
+                    className={`text-white/80 mb-8 leading-relaxed group-hover:text-white/95 transition-colors duration-500 ${
+                      index === 0 ? "text-lg" : ""
+                    }`}
+                  >
                     {post.excerpt}
                   </p>
 
@@ -93,9 +110,12 @@ export default function BlogPage() {
                     className="inline-flex items-center text-cyan-400 hover:text-cyan-300 font-bold text-lg group-hover:translate-x-3 transition-all duration-500"
                   >
                     Read Full Article
-                    <ArrowRight size={20} className="ml-3 group-hover:translate-x-2 transition-transform duration-500" />
+                    <ArrowRight
+                      size={20}
+                      className="ml-3 group-hover:translate-x-2 transition-transform duration-500"
+                    />
                   </Link>
-                  
+
                   <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-3xl"></div>
                 </article>
               ))}
@@ -105,5 +125,5 @@ export default function BlogPage() {
       </main>
       <Footer />
     </PageTransition>
-  )
+  );
 }

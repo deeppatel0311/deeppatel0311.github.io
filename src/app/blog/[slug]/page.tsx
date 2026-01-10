@@ -13,6 +13,7 @@ import { getBlogPost, getRelatedPosts, getBlogPosts } from "@/data/blog";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
+import RenderPage from "../RenderPage";
 
 interface BlogPostPageProps {
   params: {
@@ -56,13 +57,11 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
       <Header />
       <main className="pt-20">
         <article>
-          <header className="section-padding morphing-bg relative overflow-hidden">
+          <header className="section-padding morphing-bg relative overflow-hidden py-12">
             {/* Enhanced background elements */}
             <div className="absolute inset-0">
               <div className="absolute top-20 right-20 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl"></div>
-              <div
-                className="absolute bottom-20 left-20 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl"
-              ></div>
+              <div className="absolute bottom-20 left-20 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl"></div>
             </div>
 
             <div className="container-max relative z-10">
@@ -82,7 +81,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                   <div className="flex items-center">
                     <Calendar size={18} className="mr-3 text-purple-400" />
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
+                    <span>
+                      {new Date(post.date).toLocaleDateString("en-GB")}
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <Clock size={18} className="mr-3 text-blue-400" />
@@ -117,69 +118,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             <div className="container-max">
               <div className="max-w-4xl mx-auto">
                 <div className="glass-strong p-10 prose prose-lg prose-invert max-w-none border border-white/5">
-                  {post.content.split("\n").map((line, index) => {
-                    if (line.startsWith("# ")) {
-                      return (
-                        <h1
-                          key={index}
-                          className="text-4xl font-black text-white mb-6 mt-8 leading-tight"
-                        >
-                          {line.slice(2)}
-                        </h1>
-                      );
-                    }
-                    if (line.startsWith("## ")) {
-                      return (
-                        <h2
-                          key={index}
-                          className="text-3xl font-bold text-cyan-300 mb-4 mt-8 leading-tight"
-                        >
-                          {line.slice(3)}
-                        </h2>
-                      );
-                    }
-                    if (line.startsWith("### ")) {
-                      return (
-                        <h3
-                          key={index}
-                          className="text-2xl font-bold text-purple-300 mb-3 mt-6 leading-tight"
-                        >
-                          {line.slice(4)}
-                        </h3>
-                      );
-                    }
-                    if (line.startsWith("- ")) {
-                      return (
-                        <li key={index} className="text-white/90 mb-2 text-lg leading-relaxed ml-4">
-                          {line.slice(2)}
-                        </li>
-                      );
-                    }
-                    if (line.startsWith("```")) {
-                      return null;
-                    }
-                    if (line.trim() === "") {
-                      return <div key={index} className="h-4" />;
-                    }
-                    if (line.startsWith("**") && line.endsWith("**")) {
-                      return (
-                        <p
-                          key={index}
-                          className="text-cyan-300 font-bold mb-4 text-lg leading-relaxed"
-                        >
-                          {line.slice(2, -2)}
-                        </p>
-                      );
-                    }
-                    return (
-                      <p
-                        key={index}
-                        className="text-white/90 mb-4 leading-relaxed text-lg"
-                      >
-                        {line}
-                      </p>
-                    );
-                  })}
+                  <RenderPage post={post} />
                 </div>
               </div>
             </div>
