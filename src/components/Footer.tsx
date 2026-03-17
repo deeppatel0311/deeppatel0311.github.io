@@ -78,10 +78,28 @@ export default function Footer() {
 
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>deep.p0311@gmail.com</li>
-              <li>+1 (555) 123-4567</li>
-              <li>San Francisco, CA</li>
+            <ul className="space-y-3 text-gray-400">
+              <li>
+                <a
+                  href="mailto:deep.p0311@gmail.com"
+                  className="flex items-center gap-2 hover:text-white transition-colors duration-200"
+                >
+                  <Mail size={16} />
+                  deep.p0311@gmail.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/deeppatel0311/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-white transition-colors duration-200"
+                >
+                  <Linkedin size={16} />
+                  linkedin.com/in/deeppatel0311
+                </a>
+              </li>
+              <li>Ahmedabad, Gj, India</li>
             </ul>
           </div>
         </div>
