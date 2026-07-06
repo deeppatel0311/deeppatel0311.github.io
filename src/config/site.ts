@@ -1,0 +1,26 @@
+export const SITE = {
+  url: "https://deeppatel0311.github.io",
+  name: "Deep Patel",
+  title: "Deep Patel — Software Developer",
+  description:
+    "Software developer with 7+ years of experience — serverless backends on AWS (Node.js, TypeScript, CDK), React frontends, and native Android apps. Based in Ahmedabad, India.",
+  email: "deep.p0311@gmail.com",
+  location: "Ahmedabad, Gujarat, India",
+  github: "https://github.com/deeppatel0311",
+  linkedin: "https://www.linkedin.com/in/deeppatel0311/",
+  keywords: [
+    "Deep Patel",
+    "software developer",
+    "serverless developer",
+    "AWS developer",
+    "backend developer",
+    "Node.js",
+    "TypeScript",
+    "AWS Lambda",
+    "AWS CDK",
+    "React",
+    "Android developer",
+    "Ahmedabad",
+    "India",
+  ],
+};

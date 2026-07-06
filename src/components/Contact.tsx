@@ -1,279 +1,187 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  MessageCircle,
-  CheckCircle,
-  Sparkles,
-  Linkedin,
-} from "lucide-react";
-import {
-  FadeInUp,
-  FadeInLeft,
-  FadeInRight,
-  StaggerContainer,
-  StaggerItem,
-  FloatingElement,
-  PulseGlow,
-  SlideInFromBottom,
-} from "@/components/EnhancedAnimations";
+import { ArrowUpRight, CheckCircle } from "lucide-react";
+import { Reveal, LineReveal, Magnetic } from "@/components/Motion";
+
+const LINKS = [
+  { label: "Email", value: "deep.p0311@gmail.com", href: "mailto:deep.p0311@gmail.com" },
+  { label: "Phone", value: "+91 8490919815", href: "tel:+918490919815" },
+  { label: "LinkedIn", value: "in/deeppatel0311", href: "https://www.linkedin.com/in/deeppatel0311/" },
+  { label: "GitHub", value: "deeppatel0311", href: "https://github.com/deeppatel0311" },
+];
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
 
     try {
       const response = await fetch("https://formspree.io/f/xrebnoza", {
         method: "POST",
-        headers: { "Accept": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
+        headers: { Accept: "application/json" },
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         setIsSubmitted(true);
         setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setIsSubmitted(false), 3000);
+        setTimeout(() => setIsSubmitted(false), 4000);
       } else {
         const data = await response.json();
         throw new Error(data?.errors?.[0]?.message || "Failed to send message");
       }
-    } catch (error) {
-      console.error("Error sending message:", error);
-      alert("Failed to send message. Please try again.");
+    } catch (err) {
+      console.error("Error sending message:", err);
+      setError("Something went wrong — please try again or email me directly.");
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const contactInfo = [
-    {
-      icon: <Mail className="w-6 h-6" />,
-      title: "Email",
-      value: "deep.p0311@gmail.com",
-      href: "mailto:deep.p0311@gmail.com",
-      color: "text-blue-400",
-    },
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: "Phone",
-      value: "+91 8490919815",
-      href: "tel:+918490919815",
-      color: "text-green-400",
-    },
-    {
-      icon: <MapPin className="w-6 h-6" />,
-      title: "Location",
-      value: "Ahmedabad, India",
-      href: "#",
-      color: "text-purple-400",
-    },
-    {
-      icon: <Linkedin className="w-6 h-6" />,
-      title: "LinkedIn",
-      value: "Connect with me",
-      href: "https://www.linkedin.com/in/deeppatel0311/",
-      color: "text-blue-500",
-    },
-  ];
+  const inputClass =
+    "w-full bg-transparent border-0 border-b border-white/20 focus:border-acid focus:ring-0 outline-none py-4 text-lg text-paper placeholder:text-muted/60 transition-colors duration-300";
 
   return (
-    <section
-      id="contact"
-      className="section-padding bg-slate-950 relative overflow-hidden"
-    >
-      {/* Subtle pattern for Contact */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-[conic-gradient(from_0deg_at_50%_50%,transparent_0deg,rgba(244,63,94,0.06)_60deg,transparent_120deg)]"></div>
-      </div>
+    <section id="contact" className="section-padding relative">
+      <div className="container-max">
+        <Reveal>
+          <p className="section-label mb-6">04 / Contact</p>
+        </Reveal>
 
-      <div className="container-max relative z-10">
-        <div className="text-center mb-20">
-          <div className="flex justify-center mb-6">
-            <div className="glass-strong p-4 rounded-2xl">
-              <MessageCircle className="w-8 h-8 text-blue-400" />
-            </div>
-          </div>
-          <h2 className="text-5xl font-bold mb-6">
-            Get In <span className="gradient-text">Touch</span>
-          </h2>
-          <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-            Have a project in mind or want to collaborate? I'd love to hear from
-            you. Let's create something amazing together.
+        <h2 className="display-heading text-giant mb-6">
+          <LineReveal>
+            <span className="text-paper">Let&apos;s build</span>
+          </LineReveal>
+          <LineReveal delay={0.1}>
+            <span className="text-outline hover-fill">something.</span>
+          </LineReveal>
+        </h2>
+
+        <Reveal delay={0.2}>
+          <a
+            href="mailto:deep.p0311@gmail.com"
+            className="link-sweep inline-block text-xl md:text-3xl font-bold text-acid"
+          >
+            deep.p0311@gmail.com
+          </a>
+          <p className="font-mono text-xs uppercase tracking-widest text-muted mt-6 mb-20 flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-acid inline-block animate-pulse" />
+            Open to full-time roles, freelance projects & collaborations
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div className="glass-strong p-8">
-              <h3 className="text-3xl font-semibold mb-8 gradient-text">
-                Let's Connect
-              </h3>
-              <p className="text-white/80 mb-8 leading-relaxed">
-                I'm always open to discussing new opportunities, interesting
-                projects, or just having a chat about technology and
-                development.
-              </p>
-
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => (
+        <div className="grid lg:grid-cols-12 gap-16">
+          {/* Direct links */}
+          <Reveal className="lg:col-span-5">
+            <ul className="border-t border-white/15">
+              {LINKS.map((link, i) => (
+                <li key={i}>
                   <a
-                    key={index}
-                    href={info.href}
-                    className="flex items-center p-4 glass rounded-2xl hover:bg-white/10 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 group"
-                    style={{ animationDelay: `${index * 150}ms` }}
+                    href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      link.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    className="group flex items-baseline justify-between border-b border-white/15 py-6 transition-colors duration-300 hover:bg-ink-soft px-4 -mx-4"
                   >
-                    <div
-                      className={`w-14 h-14 ${info.color} bg-white/10 rounded-2xl flex items-center justify-center mr-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}
-                    >
-                      {info.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-1 group-hover:text-blue-300 transition-colors duration-300">
-                        {info.title}
-                      </h4>
-                      <p className="text-white/70 group-hover:text-white/90 transition-colors duration-300">
-                        {info.value}
-                      </p>
-                    </div>
+                    <span className="font-mono text-xs uppercase tracking-widest text-muted">
+                      {link.label}
+                    </span>
+                    <span className="flex items-center gap-2 text-paper group-hover:text-acid transition-colors duration-300">
+                      {link.value}
+                      <ArrowUpRight size={16} />
+                    </span>
                   </a>
-                ))}
-              </div>
-            </div>
-          </div>
+                </li>
+              ))}
+              <li className="flex items-baseline justify-between py-6 px-4 -mx-4 border-b border-white/15">
+                <span className="font-mono text-xs uppercase tracking-widest text-muted">
+                  Location
+                </span>
+                <span className="text-paper">Ahmedabad, India</span>
+              </li>
+            </ul>
+          </Reveal>
 
-          {/* Contact Form */}
-          <div className="glass-strong p-10 relative overflow-hidden">
-            {/* Success overlay */}
+          {/* Form */}
+          <Reveal delay={0.15} className="lg:col-span-7 relative">
             {isSubmitted && (
-              <div className="absolute inset-0 bg-green-500/20 backdrop-blur-sm flex items-center justify-center z-10 rounded-3xl">
+              <div className="absolute inset-0 bg-ink/90 backdrop-blur-sm flex items-center justify-center z-10">
                 <div className="text-center">
-                  <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4 animate-pulse" />
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    Message Sent!
+                  <CheckCircle className="w-12 h-12 text-acid mx-auto mb-4" />
+                  <h3 className="display-heading text-2xl text-paper mb-2">
+                    Message sent
                   </h3>
-                  <p className="text-white/80">
-                    Thank you for reaching out. I'll get back to you soon.
-                  </p>
+                  <p className="text-muted">I&apos;ll get back to you soon.</p>
                 </div>
               </div>
             )}
 
-            <div className="flex items-center mb-8">
-              <Sparkles className="w-6 h-6 text-yellow-400 mr-3" />
-              <h3 className="text-2xl font-semibold text-white">
-                Send a Message
-              </h3>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="group">
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-white/90 mb-3 group-focus-within:text-blue-400 transition-colors duration-300"
-                >
-                  Name
-                </label>
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid sm:grid-cols-2 gap-8">
                 <input
                   type="text"
-                  id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-6 py-4 bg-white/5 border border-white/20 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-white placeholder-white/50 hover:bg-white/10"
+                  aria-label="Your name"
+                  className={inputClass}
                   placeholder="Your name"
                 />
-              </div>
-
-              <div className="group">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-white/90 mb-3 group-focus-within:text-blue-400 transition-colors duration-300"
-                >
-                  Email
-                </label>
                 <input
                   type="email"
-                  id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-6 py-4 bg-white/5 border border-white/20 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-white placeholder-white/50 hover:bg-white/10"
-                  placeholder="your.email@example.com"
+                  aria-label="Your email"
+                  className={inputClass}
+                  placeholder="your@email.com"
                 />
               </div>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={4}
+                aria-label="Your message"
+                className={`${inputClass} resize-none`}
+                placeholder="Tell me about your project…"
+              />
 
-              <div className="group">
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-white/90 mb-3 group-focus-within:text-blue-400 transition-colors duration-300"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-6 py-4 bg-white/5 border border-white/20 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none text-white placeholder-white/50 hover:bg-white/10"
-                  placeholder="Tell me about your project..."
-                />
-              </div>
+              {error && (
+                <p className="font-mono text-sm text-red-400">{error}</p>
+              )}
 
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full btn-primary group relative overflow-hidden"
-              >
-                <span
-                  className={`flex items-center justify-center transition-all duration-300 ${
-                    isLoading ? "opacity-0" : "opacity-100"
-                  }`}
+              <Magnetic>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="btn-primary disabled:opacity-60 disabled:cursor-wait"
                 >
-                  <Send
-                    size={18}
-                    className="mr-2 group-hover:translate-x-1 transition-transform duration-300"
-                  />
-                  Send Message
-                </span>
-                {isLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  </div>
-                )}
-              </button>
+                  {isLoading ? "Sending…" : "Send message"}
+                  {!isLoading && <ArrowUpRight className="ml-2 w-4 h-4" />}
+                </button>
+              </Magnetic>
             </form>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

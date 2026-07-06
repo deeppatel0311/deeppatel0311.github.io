@@ -6,10 +6,12 @@ import Projects from '@/components/Projects'
 import BlogPreview from '@/components/BlogPreview'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import { ScrollProgress } from '@/components/Motion'
 
 export default function Home() {
   return (
     <PageTransition>
+      <ScrollProgress />
       <main>
         <Header />
         <Hero />

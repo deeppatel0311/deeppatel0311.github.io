@@ -1,19 +1,12 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import {
-  Calendar,
-  Clock,
-  ArrowLeft,
-  Tag,
-  User,
-  Zap,
-  BookOpen,
-} from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { getBlogPost, getRelatedPosts, getBlogPosts } from "@/data/blog";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import RenderPage from "../RenderPage";
+import { SITE } from "@/config/site";
 
 interface BlogPostPageProps {
   params: {
@@ -38,8 +31,28 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   }
 
   return {
-    title: `${post.title} - Deep Patel Blog`,
+    title: post.title,
     description: post.excerpt,
+    keywords: post.tags,
+    alternates: {
+      canonical: `/blog/${post.slug}/`,
+    },
+    openGraph: {
+      type: "article",
+      url: `${SITE.url}/blog/${post.slug}/`,
+      title: post.title,
+      description: post.excerpt,
+      publishedTime: post.date,
+      authors: [SITE.name],
+      tags: post.tags,
+      images: [{ url: "/og.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: ["/og.png"],
+    },
   };
 }
 
@@ -52,60 +65,73 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   const relatedPosts = getRelatedPosts(params.slug);
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    keywords: post.tags.join(", "),
+    url: `${SITE.url}/blog/${post.slug}/`,
+    author: {
+      "@type": "Person",
+      name: SITE.name,
+      url: SITE.url,
+    },
+    publisher: {
+      "@type": "Person",
+      name: SITE.name,
+      url: SITE.url,
+    },
+    mainEntityOfPage: `${SITE.url}/blog/${post.slug}/`,
+  };
+
   return (
     <PageTransition>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Header />
-      <main className="pt-20">
+      <main className="pt-28">
         <article>
-          <header className="section-padding morphing-bg relative overflow-hidden py-12">
-            {/* Enhanced background elements */}
-            <div className="absolute inset-0">
-              <div className="absolute top-20 right-20 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-20 left-20 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl"></div>
-            </div>
-
-            <div className="container-max relative z-10">
+          <header className="px-5 sm:px-8 lg:px-12 pt-12 pb-16 border-b border-white/15">
+            <div className="container-max">
               <Link
                 href="/blog"
-                className="inline-flex items-center text-cyan-400 hover:text-cyan-300 mb-12 font-semibold text-lg transition-all duration-300 transform hover:translate-x-2"
+                className="link-sweep inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted hover:text-paper mb-12"
               >
-                <ArrowLeft size={20} className="mr-3" />
-                Back to Blog
+                <ArrowLeft size={14} />
+                All posts
               </Link>
 
               <div className="max-w-4xl">
-                <div className="flex flex-wrap items-center gap-6 text-lg text-white/70 mb-8">
-                  <div className="flex items-center">
-                    <User size={18} className="mr-3 text-cyan-400" />
-                    <span>{post.author.name}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Calendar size={18} className="mr-3 text-purple-400" />
-                    <span>
-                      {new Date(post.date).toLocaleDateString("en-GB")}
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <Clock size={18} className="mr-3 text-blue-400" />
-                    <span>{post.readTime}</span>
-                  </div>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-widest text-muted mb-8">
+                  <span className="text-acid">{post.author.name}</span>
+                  <span>
+                    {new Date(post.date).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </span>
+                  <span>{post.readTime}</span>
                 </div>
 
-                <h1 className="text-5xl md:text-7xl font-black text-white mb-8 leading-tight">
+                <h1 className="display-heading text-big text-paper mb-8">
                   {post.title}
                 </h1>
 
-                <p className="text-2xl text-white/90 mb-10 leading-relaxed font-light">
+                <p className="text-lg md:text-xl text-muted leading-relaxed mb-10">
                   {post.excerpt}
                 </p>
 
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-2">
                   {post.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="inline-flex items-center px-6 py-3 bg-cyan-500/5 text-cyan-300 text-lg rounded-full border border-cyan-500/15"
+                      className="font-mono text-xs uppercase tracking-wider px-3 py-1.5 border border-white/20 text-paper/60"
                     >
-                      <Zap size={16} className="mr-2" />
                       {tag}
                     </span>
                   ))}
@@ -114,64 +140,42 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           </header>
 
-          <section className="section-padding bg-gradient-to-b from-gray-900 to-black">
+          <section className="section-padding !py-16">
             <div className="container-max">
-              <div className="max-w-4xl mx-auto">
-                <div className="glass-strong p-10 prose prose-lg prose-invert max-w-none border border-white/5">
-                  <RenderPage post={post} />
-                </div>
+              <div className="max-w-3xl">
+                <RenderPage post={post} />
               </div>
             </div>
           </section>
         </article>
 
         {relatedPosts.length > 0 && (
-          <section className="section-padding bg-black">
+          <section className="section-padding !pt-8">
             <div className="container-max">
-              <div className="text-center mb-16">
-                <div className="flex justify-center mb-6">
-                  <div className="glass-strong p-4 rounded-full border border-white/5">
-                    <BookOpen className="w-8 h-8 text-cyan-400" />
-                  </div>
-                </div>
-                <h2 className="text-4xl font-black text-white mb-4">
-                  Related <span className="gradient-text">Posts</span>
-                </h2>
-              </div>
+              <p className="section-label mb-10">Related posts</p>
 
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="border-t border-white/15">
                 {relatedPosts.map((relatedPost) => (
-                  <article
+                  <Link
                     key={relatedPost.slug}
-                    className="glass-strong p-8 card-hover group border border-white/5"
+                    href={`/blog/${relatedPost.slug}`}
+                    className="group grid md:grid-cols-12 gap-4 items-baseline border-b border-white/15 py-8 px-4 -mx-4 transition-colors duration-500 hover:bg-ink-soft"
                   >
-                    <div className="flex items-center text-sm text-white/60 mb-4">
-                      <Calendar size={14} className="mr-2 text-cyan-400" />
-                      <span>
-                        {new Date(relatedPost.date).toLocaleDateString()}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors duration-300">
-                      <Link
-                        href={`/blog/${relatedPost.slug}`}
-                        className="hover:underline"
-                      >
-                        {relatedPost.title}
-                      </Link>
+                    <span className="font-mono text-xs text-muted md:col-span-2">
+                      {new Date(relatedPost.date).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                    <h3 className="text-xl md:text-2xl font-bold text-paper group-hover:text-acid transition-colors duration-500 md:col-span-9">
+                      {relatedPost.title}
                     </h3>
-
-                    <p className="text-white/80 text-sm mb-6 leading-relaxed group-hover:text-white/95 transition-colors duration-300">
-                      {relatedPost.excerpt}
-                    </p>
-
-                    <Link
-                      href={`/blog/${relatedPost.slug}`}
-                      className="text-cyan-400 hover:text-cyan-300 font-semibold text-sm group-hover:translate-x-2 transition-all duration-300"
-                    >
-                      Read More →
-                    </Link>
-                  </article>
+                    <ArrowUpRight
+                      size={20}
+                      className="hidden md:block md:col-span-1 justify-self-end text-muted group-hover:text-acid group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
+                    />
+                  </Link>
                 ))}
               </div>
             </div>

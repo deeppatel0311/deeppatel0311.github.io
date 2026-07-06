@@ -1,116 +1,73 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
+import { Parallax } from "@/components/Motion";
+import { ScrambleText } from "@/components/Effects";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white section-padding">
-      <div className="container-max">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
-          <div>
-            <h3 className="text-2xl font-bold mb-4">Portfolio</h3>
-            <p className="text-gray-400 mb-4">
-              Cloud-focused Backend Developer passionate about building
-              scalable, serverless applications and automated cloud solutions.
-            </p>
-            <div className="flex space-x-4">
-              <a
-                href="https://github.com/deeppatel0311"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors duration-200"
-              >
-                <Github size={20} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/deeppatel0311/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors duration-200"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="mailto:deep.p0311@gmail.com"
-                className="text-gray-400 hover:text-white transition-colors duration-200"
-              >
-                <Mail size={20} />
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#about"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#projects"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  Blog
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
-            <ul className="space-y-3 text-gray-400">
-              <li>
-                <a
-                  href="mailto:deep.p0311@gmail.com"
-                  className="flex items-center gap-2 hover:text-white transition-colors duration-200"
-                >
-                  <Mail size={16} />
-                  deep.p0311@gmail.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.linkedin.com/in/deeppatel0311/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-white transition-colors duration-200"
-                >
-                  <Linkedin size={16} />
-                  linkedin.com/in/deeppatel0311
-                </a>
-              </li>
-              <li>Ahmedabad, Gj, India</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-t border-gray-800 pt-8 text-center">
-          <p className="text-gray-400 flex items-center justify-center">
-            Made with <Heart size={16} className="mx-1 text-red-500" /> by Deep
-            Patel
-            <span className="mx-2">•</span>© 2026 All rights reserved
+    <footer className="border-t border-white/15 overflow-hidden">
+      {/* Giant sign-off — drifts up as it scrolls into view */}
+      <div className="container-max px-5 sm:px-8 lg:px-12 pt-16">
+        <Parallax speed={40}>
+          <p
+            aria-hidden
+            className="display-heading text-[min(11.5vw,9.5rem)] text-outline opacity-20 hover:opacity-60 transition-opacity duration-700 whitespace-nowrap select-none leading-none text-center"
+          >
+            Deep Patel
           </p>
+        </Parallax>
+      </div>
+
+      <div className="container-max px-5 sm:px-8 lg:px-12 py-10 flex flex-col items-center text-center gap-8 md:flex-row md:items-center md:justify-between md:text-left">
+        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-3 font-mono text-xs uppercase tracking-widest text-muted">
+          <Link href="/" className="hover:text-acid transition-colors">
+            <ScrambleText text="Home" />
+          </Link>
+          <Link href="/#about" className="hover:text-acid transition-colors">
+            <ScrambleText text="About" />
+          </Link>
+          <Link href="/#projects" className="hover:text-acid transition-colors">
+            <ScrambleText text="Work" />
+          </Link>
+          <Link href="/blog" className="hover:text-acid transition-colors">
+            <ScrambleText text="Blog" />
+          </Link>
+          <Link href="/#contact" className="hover:text-acid transition-colors">
+            <ScrambleText text="Contact" />
+          </Link>
+        </nav>
+
+        <div className="flex gap-5">
+          <a
+            href="https://github.com/deeppatel0311"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="text-muted hover:text-acid transition-colors"
+          >
+            <Github size={18} />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/deeppatel0311/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="text-muted hover:text-acid transition-colors"
+          >
+            <Linkedin size={18} />
+          </a>
+          <a
+            href="mailto:deep.p0311@gmail.com"
+            aria-label="Email"
+            className="text-muted hover:text-acid transition-colors"
+          >
+            <Mail size={18} />
+          </a>
         </div>
+
+        <p className="font-mono text-xs text-muted">
+          © 2026 Deep Patel — Ahmedabad, India
+        </p>
       </div>
     </footer>
   );

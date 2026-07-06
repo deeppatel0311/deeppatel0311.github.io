@@ -1,135 +1,130 @@
-import { ExternalLink, Github } from "lucide-react";
-import {
-  FadeInUp,
-  StaggerContainer,
-  StaggerItem,
-} from "@/components/Animations";
-import {
-  EnhancedSection,
-  GlassCard,
-  AnimatedText,
-  StaggerGrid,
-  GridItem,
-  GradientBorder,
-} from "@/components/EnhancedUI";
+import { ArrowUpRight, Github } from "lucide-react";
+import { Reveal, LineReveal } from "@/components/Motion";
+import { Tilt } from "@/components/Effects";
+
+const PROJECTS = [
+  {
+    title: "AWS Podcast Platform",
+    description:
+      "Turns AWS RSS feeds into professional podcast audio automatically — AI-generated scripts via Amazon Bedrock, voiced with Amazon Polly, on a fully serverless pipeline.",
+    technologies: ["Amazon Bedrock", "Amazon Polly", "AWS Lambda", "DynamoDB", "S3"],
+    github: "https://github.com/deeppatel0311/aws-podcast",
+    live: "https://deeppatel0311.github.io/aws-podcast/",
+  },
+  {
+    title: "Word Wizard",
+    description:
+      "A fast, no-nonsense text processing tool built with React — case conversion, text manipulation, and encoding utilities with local-storage persistence.",
+    technologies: ["React", "JavaScript", "Tailwind CSS", "Local Storage"],
+    github: "https://github.com/deeppatel0311/word-wizard",
+    live: "https://deeppatel0311.github.io/word-wizard",
+  },
+  {
+    title: "Android User Authentication",
+    description:
+      "Secure native Android authentication with biometric login, JWT token management, and encrypted local storage — modern mobile security practices end to end.",
+    technologies: ["Android Native", "Java", "Biometric API", "JWT", "SQLite"],
+    github: "https://github.com/deeppatel0311/android-authenticate-user",
+    live: null,
+  },
+];
 
 export default function Projects() {
-  const projects = [
-    {
-      title: "AWS Podcast Platform",
-      description:
-        "A proprietary React application for delivering AWS news and updates in podcast format. This platform automatically converts AWS RSS feeds into professional audio content using AI-powered script generation and text-to-speech technology.",
-      technologies: [
-        "Amazon Bedrock",
-        "Amazon Polly",
-        "AWS Lambda",
-        "DynamoDB",
-        "S3",
-      ],
-      github: "https://github.com/deeppatel0311/aws-podcast",
-      live: "https://deeppatel0311.github.io/aws-podcast/",
-      gradient: "from-orange-500 to-red-500",
-    },
-    {
-      title: "Word Wizard Game",
-      description:
-        "A simple and powerful text processing tool built with React. Transform your text with essential formatting options including case conversion, text manipulation, and encoding tools.",
-      technologies: ["React", "Java Script", "Tailwind css", "Local Storage"],
-      github: "https://github.com/deeppatel0311/word-wizard",
-      live: "https://deeppatel0311.github.io/word-wizard",
-      gradient: "from-purple-500 to-pink-500",
-    },
-    {
-      title: "Android User Authentication",
-      description:
-        "Secure Android authentication system with biometric login, JWT token management, and encrypted local storage. Implements modern security practices for mobile applications.",
-      technologies: [
-        "Android Native",
-        "Java",
-        "Biometric API",
-        "JWT",
-        "SQLite",
-      ],
-      github: "https://github.com/deeppatel0311/android-authenticate-user",
-      live: "#",
-      gradient: "from-green-500 to-teal-500",
-    },
-  ];
-
   return (
-    <section id="projects" className="section-padding bg-gray-950 relative">
-      {/* Subtle pattern for Projects */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(139,92,246,0.05)_50%,transparent_75%)] bg-[length:40px_40px]"></div>
+    <section id="projects" className="section-padding relative">
+      <div className="container-max">
+        <Reveal>
+          <p className="section-label mb-6">02 / Selected Work</p>
+        </Reveal>
+
+        <h2 className="display-heading text-giant mb-20">
+          <LineReveal>
+            <span className="text-outline">Things I&apos;ve</span>
+          </LineReveal>
+          <LineReveal delay={0.1}>
+            <span className="text-paper">shipped</span>
+            <span className="text-acid">.</span>
+          </LineReveal>
+        </h2>
       </div>
-      <div className="container-max relative z-10">
-        <AnimatedText className="text-center mb-20">
-          <h2 className="text-5xl font-bold mb-6">
-            Featured <span className="gradient-text">Projects</span>
-          </h2>
-          <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-            Here are some of my recent projects showcasing cloud backend
-            development, cross-platform mobile apps, and full-stack solutions.
-          </p>
-        </AnimatedText>
 
-        <StaggerGrid className="grid lg:grid-cols-3 gap-10">
-          {projects.map((project, index) => (
-            <GridItem key={index}>
-              <GradientBorder className="overflow-hidden h-full">
-                <div
-                  className={`relative h-56 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}
+      {/* Full-bleed project rows */}
+      <div className="border-t border-white/15">
+        {PROJECTS.map((project, i) => (
+          <Reveal key={i}>
+            <article className="group relative border-b border-white/15 transition-colors duration-500 hover:bg-ink-soft">
+              <Tilt className="container-max px-5 sm:px-8 lg:px-12 py-14 md:py-20 grid lg:grid-cols-12 gap-8 items-start">
+                <span
+                  aria-hidden
+                  className="hidden lg:block lg:col-span-2 font-display text-7xl text-outline opacity-40 group-hover:text-outline-acid group-hover:opacity-100 transition-opacity duration-500"
                 >
-                  <div className="text-white text-2xl font-bold opacity-80">
-                    {project.title}
-                  </div>
-                  <div className="absolute inset-0 bg-black/20"></div>
-                </div>
+                  00{i + 1}
+                </span>
 
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold text-white mb-4">
+                <div className="lg:col-span-6">
+                  <h3 className="display-heading text-3xl md:text-5xl text-paper mb-6 group-hover:text-acid group-hover:translate-x-3 transition-all duration-500 ease-out">
                     {project.title}
                   </h3>
-                  <p className="text-white/70 mb-6 leading-relaxed">
+                  <p className="text-muted leading-relaxed max-w-xl">
                     {project.description}
                   </p>
+                </div>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.map((tech, techIndex) => (
+                <div className="lg:col-span-4 flex flex-col gap-8 lg:items-end">
+                  <div className="flex flex-wrap gap-2 lg:justify-end">
+                    {project.technologies.map((tech, t) => (
                       <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-white/10 text-white/90 text-sm rounded-full border border-white/20"
+                        key={t}
+                        className="font-mono text-xs uppercase tracking-wider px-3 py-1.5 border border-white/20 text-paper/70 group-hover:border-acid/40 transition-colors duration-500"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <div className="flex space-x-4">
+                  <div className="flex gap-6 font-mono text-sm uppercase tracking-wider">
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-white/80 hover:text-white transition-colors duration-300 font-medium"
+                      className="link-sweep flex items-center gap-2 text-paper/80 hover:text-paper"
                     >
-                      <Github size={18} className="mr-2" />
-                      <span>Code</span>
+                      <Github size={16} />
+                      Code
                     </a>
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-white/80 hover:text-white transition-colors duration-300 font-medium"
-                    >
-                      <ExternalLink size={18} className="mr-2" />
-                      <span>Live Demo</span>
-                    </a>
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-sweep flex items-center gap-2 text-acid"
+                      >
+                        Live
+                        <ArrowUpRight
+                          size={16}
+                          className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+                        />
+                      </a>
+                    )}
                   </div>
                 </div>
-              </GradientBorder>
-            </GridItem>
-          ))}
-        </StaggerGrid>
+              </Tilt>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+
+      <div className="container-max px-5 sm:px-8 lg:px-12 mt-14">
+        <Reveal>
+          <a
+            href="https://github.com/deeppatel0311"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-sweep font-mono text-sm uppercase tracking-widest text-paper/70 hover:text-paper inline-flex items-center gap-2"
+          >
+            More on GitHub <ArrowUpRight size={16} />
+          </a>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,0 +1,43 @@
+# Deep Patel — Software Developer
+
+> Software developer with 7+ years of experience. Specialized in serverless
+> backends on AWS (Node.js, TypeScript, AWS CDK, Lambda, AppSync, DynamoDB),
+> and fluent across the stack with React and native Android. Based in
+> Ahmedabad, Gujarat, India. Open to full-time roles, freelance projects,
+> and collaborations.
+
+## About
+
+- Name: Deep Patel
+- Role: Software Developer (serverless/cloud specialty)
+- Experience: 7+ years building production software
+- Core stack: AWS (Lambda, AppSync/GraphQL, DynamoDB, S3, API Gateway,
+  EventBridge, CloudWatch), Node.js, TypeScript, AWS CDK, CloudFormation,
+  Serverless Framework
+- Also works with: React, JavaScript, Tailwind CSS, native Android, SQL & NoSQL
+- Writes a technical blog focused on making AWS and serverless concepts simple
+
+## Selected Work
+
+- [AWS Podcast Platform](https://github.com/deeppatel0311/aws-podcast):
+  Converts AWS RSS feeds into podcast audio automatically — AI-generated
+  scripts via Amazon Bedrock, voiced with Amazon Polly, fully serverless
+  (Lambda, DynamoDB, S3). Live: https://deeppatel0311.github.io/aws-podcast/
+- [Word Wizard](https://github.com/deeppatel0311/word-wizard): Fast text
+  processing tool built with React — case conversion, text manipulation,
+  encoding utilities. Live: https://deeppatel0311.github.io/word-wizard
+- [Android User Authentication](https://github.com/deeppatel0311/android-authenticate-user):
+  Secure native Android authentication with biometric login, JWT token
+  management, and encrypted local storage.
+
+## Writing
+
+- [Blog index](https://deeppatel0311.github.io/blog/): Tutorials and thoughts
+  on cloud development, serverless architecture, and AWS best practices.
+
+## Contact
+
+- Email: deep.p0311@gmail.com
+- GitHub: https://github.com/deeppatel0311
+- LinkedIn: https://www.linkedin.com/in/deeppatel0311/
+- Location: Ahmedabad, Gujarat, India

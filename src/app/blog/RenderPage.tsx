@@ -17,16 +17,18 @@ export default function RenderPage({ post }: { post: { content: string } }) {
         .filter((cell) => cell !== "")
     );
     rendered.push(
-      <div key={rendered.length} className="overflow-x-auto mb-6">
-        <table className="table-auto border-collapse border border-gray-500 w-full text-left text-white text-lg">
+      <div key={rendered.length} className="overflow-x-auto mb-8">
+        <table className="w-full text-left border-collapse">
           <tbody>
             {tableRows.map((row, rowIndex) => (
-              <tr key={rowIndex}>
+              <tr key={rowIndex} className="border-b border-white/15">
                 {row.map((cell, cellIndex) => (
                   <td
                     key={cellIndex}
-                    className={`border border-gray-500 px-3 py-2 ${
-                      rowIndex === 0 ? "font-bold text-cyan-300" : ""
+                    className={`px-4 py-3 ${
+                      rowIndex === 0
+                        ? "font-mono text-xs uppercase tracking-wider text-acid"
+                        : "text-paper/80"
                     }`}
                   >
                     {cell}
@@ -41,7 +43,19 @@ export default function RenderPage({ post }: { post: { content: string } }) {
     tableBuffer = [];
   };
 
-  // Function to render inline bold text properly
+  const flushCode = (key: React.Key) => {
+    rendered.push(
+      <pre
+        key={key}
+        className="bg-ink-soft border border-white/10 text-paper/90 font-mono text-sm p-5 overflow-x-auto mb-8 leading-relaxed"
+      >
+        <code>{codeBuffer.join("\n")}</code>
+      </pre>
+    );
+    codeBuffer = [];
+  };
+
+  // Render **bold** inline segments
   const renderBold = (text: string) => {
     const regex = /\*\*(.*?)\*\*/g;
     const elements: React.ReactNode[] = [];
@@ -53,7 +67,7 @@ export default function RenderPage({ post }: { post: { content: string } }) {
         elements.push(text.slice(lastIndex, match.index));
       }
       elements.push(
-        <span key={match.index} className="text-cyan-300 font-bold">
+        <span key={match.index} className="text-acid font-semibold">
           {match[1]}
         </span>
       );
@@ -71,19 +85,9 @@ export default function RenderPage({ post }: { post: { content: string } }) {
     // Handle code block start/end
     if (line.startsWith("```")) {
       if (inCodeBlock) {
-        // End of code block, render it
-        rendered.push(
-          <pre
-            key={index}
-            className="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
-          >
-            <code>{codeBuffer.join("\n")}</code>
-          </pre>
-        );
-        codeBuffer = [];
+        flushCode(index);
         inCodeBlock = false;
       } else {
-        // Start of code block
         inCodeBlock = true;
       }
       return;
@@ -100,7 +104,7 @@ export default function RenderPage({ post }: { post: { content: string } }) {
       rendered.push(
         <h1
           key={index}
-          className="text-4xl font-black text-white mb-6 mt-8 leading-tight"
+          className="display-heading text-3xl md:text-4xl text-paper mb-6 mt-10"
         >
           {line.slice(2)}
         </h1>
@@ -112,8 +116,11 @@ export default function RenderPage({ post }: { post: { content: string } }) {
       rendered.push(
         <h2
           key={index}
-          className="text-3xl font-bold text-cyan-300 mb-4 mt-8 leading-tight"
+          className="text-2xl md:text-3xl font-bold text-paper mb-4 mt-12 flex items-baseline gap-3"
         >
+          <span className="text-acid font-mono text-lg" aria-hidden>
+            ##
+          </span>
           {line.slice(3)}
         </h2>
       );
@@ -124,7 +131,7 @@ export default function RenderPage({ post }: { post: { content: string } }) {
       rendered.push(
         <h3
           key={index}
-          className="text-2xl font-bold text-purple-300 mb-3 mt-6 leading-tight"
+          className="text-xl md:text-2xl font-bold text-acid mb-3 mt-8"
         >
           {line.slice(4)}
         </h3>
@@ -136,14 +143,17 @@ export default function RenderPage({ post }: { post: { content: string } }) {
     const listMatch = line.match(/^(\s*)- (.*)/);
     if (listMatch) {
       flushTable();
-      const indentLevel = listMatch[1].length / 2; // 2 spaces per level
+      const indentLevel = listMatch[1].length / 2;
       rendered.push(
         <li
           key={index}
-          className="text-white/90 mb-2 text-lg leading-relaxed list-disc"
-          style={{ marginLeft: 24 + indentLevel * 16 }} // 24px base + 16px per nested level
+          className="text-paper/80 mb-2 leading-relaxed list-none flex gap-3"
+          style={{ marginLeft: indentLevel * 20 }}
         >
-          {renderBold(listMatch[2])}
+          <span className="text-acid font-mono text-sm mt-0.5" aria-hidden>
+            →
+          </span>
+          <span>{renderBold(listMatch[2])}</span>
         </li>
       );
       return;
@@ -165,7 +175,7 @@ export default function RenderPage({ post }: { post: { content: string } }) {
 
     // Paragraphs with inline bold
     rendered.push(
-      <p key={index} className="text-white/90 mb-4 leading-relaxed text-lg">
+      <p key={index} className="text-paper/80 mb-4 leading-relaxed text-lg">
         {renderBold(line)}
       </p>
     );
@@ -175,14 +185,7 @@ export default function RenderPage({ post }: { post: { content: string } }) {
 
   // If code block was open but file ended, flush it
   if (inCodeBlock && codeBuffer.length > 0) {
-    rendered.push(
-      <pre
-        key={rendered.length}
-        className="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
-      >
-        <code>{codeBuffer.join("\n")}</code>
-      </pre>
-    );
+    flushCode(rendered.length);
   }
 
   return <div>{rendered}</div>;
